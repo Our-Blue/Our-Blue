@@ -44,7 +44,6 @@
                         </g>
                     </svg>
                 </div>
-                
                 <!--<p>テスト</p>-->
                 <p><a href="{{ route('hello') }}">HelloWorld</a></p>
 
