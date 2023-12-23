@@ -52,6 +52,7 @@
                 <p><a href="{{ route('hello') }}">HelloWorld</a></p>
 >>>>>>> origin/master
 
+                <p>テスト</p> 
                 <p><a href="{{ route('hello') }}">HelloWorld</a></p>
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
