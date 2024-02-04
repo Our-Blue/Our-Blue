@@ -46,60 +46,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
-                    "name": "gary",
-                    "email": "galley.meng@gmail.com"
-                }
-            ],
-            "description": "Simple and lightweight PHP framework",
-            "homepage": "http://www.awaimai.com",
-            "keywords": [
-                "fastphp",
-                "framework",
-                "mvc"
-            ],
-            "support": {
-                "issues": "https://github.com/yeszao/fastphp/issues",
-                "source": "https://github.com/yeszao/fastphp/tree/master"
-            },
-            "time": "2017-12-13T01:19:12+00:00"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "symfony/phpunit-bridge",
-            "version": "v7.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "c2d059b25e31274157dd7727131cd1cf33650207"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/c2d059b25e31274157dd7727131cd1cf33650207",
-                "reference": "c2d059b25e31274157dd7727131cd1cf33650207",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5"
-            },
-            "conflict": {
-                "phpunit/phpunit": "<7.5|9.1.2"
-            },
-            "require-dev": {
-                "symfony/deprecation-contracts": "^2.5|^3.0",
-                "symfony/error-handler": "^5.4|^6.4|^7.0",
-                "symfony/polyfill-php81": "^1.27"
-            },
-            "bin": [
-                "bin/simple-phpunit"
-            ],
-            "type": "symfony-bridge",
-            "extra": {
-                "thanks": {
-                    "name": "phpunit/phpunit",
-                    "url": "https://github.com/sebastianbergmann/phpunit"
-=======
                     "name": "Alexander",
                     "email": "iam.asm89@gmail.com"
                 }
@@ -3948,7 +3894,6 @@
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
->>>>>>> master
                 }
             },
             "autoload": {
