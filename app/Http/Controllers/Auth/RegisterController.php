@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CustomUser; // CustomUserモデルをインポート
-use Illuminate\Support\Facades\Hash; // パスワードのハッシュ化に使用
+use App\Models\CustomUser;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -26,12 +26,18 @@ class RegisterController extends Controller
         ]);
 
         // パスワードをハッシュ化して保存
-        $validatedData['password'] = Hash::make($request->password);
+        $hashedPassword = Hash::make($request->password);
 
         // ユーザーを作成して保存
-        CustomUser::create($validatedData);
+        $user = new CustomUser();
+        $user->name = $validatedData['name'];
+        $user->mail = $validatedData['mail'];
+        $user->password = $hashedPassword;
+        $user->role = $request->role; // hiddenフィールドで受け取った値を設定
 
-        // ログイン画面にリダイレクト
-        return redirect('/login')->with('success', 'ユーザー登録が完了しました。ログインしてください。');
+        $user->save();
+
+        // 登録成功時の処理
+        return view('auth.login')->with('success', 'ユーザー登録が完了しました。ログインしてください。');
     }
 }
