@@ -4,8 +4,8 @@
     <div class="user_info">
         <div class="user_name">
             <p>ユーザー名</p>
-            <p>開発テスト君</p>
-            <a href="" class="mypage1">
+            <p>{{$mypage->name}}</p>
+            <a href="mypage/{{$mypage->id}}/edit" class="mypage1">
              <button type='button' class='btn btn-primary'>ユーザー情報変更</button>
             </a>
             <br>
@@ -17,7 +17,7 @@
             <p class="">routeを入れる。</p>
             @if(count($tickets) > 0)
                 @foreach($tickets as $ticket)
-                 <a href=""><p>・{{$ticket->created_at}}　チケットが登録されました。</p></a>
+                 <a href="" class="ticket_a_button"><p>・@if(is_null($ticket->read_flg))<span class="read_flg_null">未読</span><span>　</span>@endif{{$ticket->created_at}}　チケットが登録されました。</p></a>
                 @endforeach
             @endif
         </div>
@@ -25,7 +25,7 @@
     <div class="ticket">
         <p>チケット一覧</p>
         <div class="ticket2">
-             <p class="">routeを入れる。</p>
+             <p class="">routeを入れる,チケット一覧のをいれる</p>
             <p>チケット一覧</p>
             <p>チケット一覧</p>
             <p>チケット一覧</p>
@@ -80,6 +80,12 @@ button{height: 40px;
   border: 1px solid black;
   width: 80%;
   margin: 0 auto;
-
+}
+.read_flg_null{
+  background-color: red;
+  color:white;
+}
+.ticket_a_button{
+    text-decoration: none;
 }
 </style>

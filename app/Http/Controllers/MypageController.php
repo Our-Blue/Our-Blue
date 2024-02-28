@@ -17,9 +17,9 @@ class MypageController extends Controller
      */
     public function index()
     {
-      /**$users=CustomUser::all();*/
+      $mypage =Auth::user();
       $tickets=Ticket::orderBy('created_at','desc')->get();
-        return view('mypage.mypage_index')->with(['tickets' => $tickets]);
+        return view('mypage.mypage_index')->with(['tickets' => $tickets,'mypage' => $mypage]);
     }
 
 
@@ -78,12 +78,13 @@ class MypageController extends Controller
     {
          $validated = $request->validate([
             'name' => 'required',
-            'password' => 'required|min:|confirmed'
-            
+            'email' => 'required|unique:Users,email',
+            'password' => 'required|confirmed'
         ], [
             'name.required' => '名前は必須項目です。',
+            'email.required' => 'メールアドレスは必須項目です。',
+            'email.unique' => 'そのメールアドレスはすでに使われています。',
             'password.required' => 'パスワードは必須項目です。',
-            'password.min' => 'パスワードは文字以上で指定してください。',
             'password.confirmed' => '確認用のパスワードが一致していません。',
         ]);
    
@@ -108,43 +109,15 @@ class MypageController extends Controller
     
    public function ChangePasswordForm(CustomUser $mypage)
    {
-      
+       $mypage=Auth::user();
       return view('mypage.mypage_password',['mypage' => $mypage,'auth'=>$mypage ]);
    }
-    
-    public function SearchForm(Request $request)
-    {
-        $search = $request->input('search');
-        $projects = Project::orderBy('created_at', 'desc');
-        /*$tickets = Ticket::orderBy('created_at', 'desc');*/
-        $query = Project::query();
-    
-        // 検索キーワードがある場合の処理
-        if ($search) {
-            // 全角スペースを半角に変換
-            $spaceConversion = mb_convert_kana($search, 's');
-    
-            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
-            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-            // 単語をループで回し、検索条件に追加
-            foreach ($wordArraySearched as $value) {
-                  $query->where('title', 'like', '%'.$value.'%')
-                  ->orWhere('explanation', 'like', '%'.$value.'%')
-                    ->orWhereHas('Tickets', function ($query) use ($search){
-                    $query->where('title', 'like', '%' .$search. '%')
-                    ->orWhere('explanation', 'like', '%'.$search.'%')
-                    ->orWhere('user_id', 'like', '%'.$search.'%');
-                     });
-            }
-        }
-         $projects =  $query->orderBy('created_at', 'desc')->get();
-         /**$tickets =  $query->orderBy('created_at', 'desc')->get();*/
-    
-        return view('search')
-            ->with([
-                'projects' =>  $projects,
-                /*'tickets' => $tickets,*/
-                'search' => $search,
-            ]);
+   
+    public function logout(Request $request){	
+        $user = CustomUser::find(auth()->user()->id);
+        Auth::logout();
+        return redirect("/");
     }
+    
+
 }
