@@ -4,25 +4,37 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password; // パスワードリセットの機能を提供するファサードをインポート
+use Illuminate\Support\Facades\Password;
+use App\Models\CustomUser;
 
 class ResetPasswordController extends Controller
 {
-    // パスワードリセットリクエストの送信フォームの表示
-    public function showResetForm()
+    // パスワードリセットフォームの表示
+    public function showResetForm($token)
     {
-        return view('auth.reset');
+        return view('auth.passwords.reset', ['token' => $token]);
     }
 
-    // パスワードリセットの処理
+    // パスワードリセットの実行処理
     public function reset(Request $request)
     {
-        // パスワードリセットリクエストを送信
-        $response = Password::sendResetLink($request->only('mail'));
-
-        // パスワードリセットリクエストの結果に基づいてリダイレクト
-        return $response == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($response))
-                    : back()->withErrors(['mail' => __($response)]);
+        $request->validate([
+            'mail' => 'required|email', 
+            'password' => 'required|min:8|confirmed',
+            'token' => 'required'
+        ]);
+    
+        $status = Password::reset(
+            $request->only('mail', 'password', 'password_confirmation', 'token'), 
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => bcrypt($password)
+                ])->save();
+            }
+        );
+    
+        return $status == Password::PASSWORD_RESET
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['mail' => __($status)]);
     }
 }
