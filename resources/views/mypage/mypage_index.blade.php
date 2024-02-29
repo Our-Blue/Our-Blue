@@ -13,6 +13,7 @@
            
         </div>
         <div class="notice_div">
+            
             <p class="notice_p">通知</p>
             <p class="">routeを入れる。</p>
             @if(count($tickets) > 0)

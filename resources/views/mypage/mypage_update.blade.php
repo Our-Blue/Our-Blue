@@ -37,6 +37,7 @@
     <a href="{{ route('password_form')}}"><p class="pass_change">パスワード変更はこちら</p></a>
 @endsection
 
+
 <style>
 /*マイページ編集情報*/
 .top_mypage{

@@ -31,6 +31,7 @@
     <button type='button'>戻る</button>
     </a>
     </div>
+    
 @endsection
 
 <style>
