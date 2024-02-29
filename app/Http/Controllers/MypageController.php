@@ -113,6 +113,7 @@ class MypageController extends Controller
       return view('mypage.mypage_password',['mypage' => $mypage,'auth'=>$mypage ]);
    }
    
+   
     public function logout(Request $request){	
         $user = CustomUser::find(auth()->user()->id);
         Auth::logout();
