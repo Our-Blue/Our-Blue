@@ -12,11 +12,7 @@
        @if(Auth::check())
         @endif　　　　　　　<!--ログイン認証完成後、検索とマイページをif文の中に移動*/-->
         <div class="search_div">
-<<<<<<<<< saved version
             <form action=""{{ route('result') }}"" method="GET" class="search_from">
-=========
-            <form action=""{{ route('result') }}"" method="GET" class="search_from">
->>>>>>>>> local version
                 <input type="search" placeholder="フリーワード検索" name="search" value="@if (isset($search)) {{ $search }} @endif">
                 <input type="submit" value="検索" class="search_button">
             </form>
