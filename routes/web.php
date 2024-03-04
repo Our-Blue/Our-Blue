@@ -50,9 +50,4 @@ Route::put('/tickets/{id}/edit', [TicketController::class, 'update'])->name('tic
 
 Route::resource('mypage', MypageController::class);
 Route::get('/password', [MypageController::class,'ChangePasswordForm'])->name('password_form');
-<<<<<<< HEAD
 Route::get('/result/{projectId}/{ticketId}', [SearchController::class, 'result'])->name('result');
-=======
-Route::get('/serach', [対象のコントローラー::class,'searchForm'])->name('serach_form'); // 　検索用。
-Route::get('/result/{projectId}/{ticketId}', [SearchController::class, 'result'])->name('result');//検索結果
->>>>>>> d432a92 (web.phpとkernel)
