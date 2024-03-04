@@ -50,5 +50,5 @@ Route::put('/tickets/{id}/edit', [TicketController::class, 'update'])->name('tic
 
 Route::resource('mypage', MypageController::class);
 Route::get('/password', [MypageController::class,'ChangePasswordForm'])->name('password_form');
-Route::get('/result/{projectId}/{ticketId}', [SearchController::class, 'result'])->name('result');
 
+Route::get('/result/{projectId}/{ticketId}', [SearchController::class, 'result'])->name('result');
