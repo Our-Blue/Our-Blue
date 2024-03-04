@@ -1,0 +1,40 @@
+/* フォーム全体のスタイル */
+.container {
+    background-color: #007bff; /* メインカラーを青色に設定 */
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff; /* テキストを白色に設定 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* ボックスシャドウを追加 */
+}
+
+/* フォーム要素のスタイル */
+.form-group label {
+    font-weight: bold;
+    color: #fff; /* ラベルのテキストカラーを白色に設定 */
+}
+
+.form-control {
+    border: 1px solid #ccc; /* 入力フィールドのボーダーを設定 */
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* ボタンのスタイル */
+.btn-primary {
+    background-color: #0056b3; /* プライマリーボタンの背景色を設定 */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0043a2; /* マウスホバー時の背景色を変更 */
+}
+
+/* セレクトボックスのスタイル */
+select.form-control {
+    background-color: #fff; /* セレクトボックスの背景色を白色に設定 */
+    color: #333; /* セレクトボックスのテキストカラーを設定 */
+}
