@@ -19,16 +19,34 @@
                     <p>管理者: {{$admin}}</p>
                     <p>{{ $projectDetails->explanation }}</p>
                     <!-- 他のプロパティに関する表示を追加 -->
+                    
+                    <!-- Ticket登録画面への遷移ボタン -->
+                    <a href="{{ route('tickets.create') }}">Ticket編集画面へ</a>
+        
+                    <!-- チケットの編集画面への遷移ボタン -->
+                    <select onchange="window.location.href=this.value">
+                        <option value="" selected>チケットを選択してください</option>
+                        @foreach($tickets as $ticket)
+                            <option value="{{ route('tickets.edit', ['id' => $ticket->ID]) }}">{{ $ticket->title }}</option>
+                        @endforeach
+                    </select>
+                    
+                    <!-- Ticket登録画面への遷移ボタン -->
+                    </br>
+                    
+                    <a href="{{ route('tickets.create') }}">Ticket登録画面へ</a>
+            
+            
                 @else
                     <!-- $projectDetails が存在しない場合の表示 -->
                     <p>Project not found.</p>
                 @endif
             </div>
-            
+
         </div>
-        
+
         <div id="gantt_here" style="width:90%; height:600px; margin-left:5%;"></div>
-    
+
         <script>
             gantt.config.date_format = "%Y-%m-%d %H:%i:%s";
             gantt.init("gantt_here");
