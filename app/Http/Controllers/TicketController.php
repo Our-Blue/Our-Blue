@@ -53,9 +53,7 @@ class TicketController extends Controller
             'project_id' => 'required|exists:Projects,ID', // プロジェクトが存在することを確認
             'title' => 'required|string|max:100|unique:Tickets', // タイトルは必須、最大100文字、一意であることを確認
             'status' => 'nullable|integer', // ステータスは整数であることを確認
-            'user_id' => 'nullable|exists:
-                
-                Users,ID', // ユーザーが存在することを確認
+            'user_id' => 'nullable|exists:Users,ID', // ユーザーが存在することを確認
             'explanation' => 'nullable|string|max:500', // 説明は最大500文字まで
             'start_day' => 'required|date', // 開始日は必須で日付形式であることを確認
             'end_day' => 'nullable|date', // 終了日は日付形式であることを確認
@@ -108,7 +106,6 @@ class TicketController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         $validatedData = $request->validate([
-            'project_id' => 'required|exists:Projects,ID', // プロジェクトが存在することを確認
             'title' => 'required|string|max:100|unique:Tickets,title,' . $id, // 既存のチケットとの一意性を確認するために $id を追加
             'status' => 'nullable|integer', // ステータスは整数であることを確認
             'user_id' => 'nullable|exists:Users,ID', // ユーザーが存在することを確認
@@ -119,9 +116,9 @@ class TicketController extends Controller
             'time' => 'nullable|integer', // 時間は整数であることを確認
             'progress' => 'nullable|integer|min:0|max:100', // 進捗率は0から100の間の整数であることを確認
         ]);
-
+       //\Log::info('Updating ticket', ['ticket_id' => $ticket->ID, 'updated_data' => $validatedData]);
         $ticket->update($validatedData);
-        //新規に作成されたチケットのプロジェクトIDを取得
+        //\Log::info('Ticket updated successfully', ['ticket_id' => $ticket->ID]);
         $projectId = $ticket->project_id;
         // プロジェクト詳細画面へリダイレクトする際にプロジェクトIDを提供する
         return redirect()->route('project', ['id' => $ticket->project_id])->with('success', 'チケットが正常に更新されました。');
