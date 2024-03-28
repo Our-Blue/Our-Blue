@@ -9,10 +9,10 @@
 <body>
     <header>
         <a href="{{ url('/') }}" class="header_home">ホーム</a>
-        @if(Auth::check())
+       @if(Auth::check())
         @endif　　　　　　　<!--ログイン認証完成後、検索とマイページをif文の中に移動*/-->
         <div class="search_div">
-            <form action="{{ route('result') }}" method="GET" class="search_form">
+            <form action=""{{ route('result') }}"" method="GET" class="search_from">
                 <input type="search" placeholder="フリーワード検索" name="search" value="@if (isset($search)) {{ $search }} @endif">
                 <input type="submit" value="検索" class="search_button">
             </form>
@@ -67,3 +67,4 @@ header {
     margin-right:3%;
 }
 </style>
+
