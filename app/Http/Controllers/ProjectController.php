@@ -55,16 +55,16 @@ class ProjectController extends Controller
         return redirect('/');
     }
 
-    // プロジェクトの編集画面を表示
-    public function edit(Project $project)
+      public function edit(Project $project)
     {
         $users = CustomUser::all();
-        $selectedMembersIds = $project->users()->pluck('ID')->toArray();
+        // プロジェクトに関連するユーザーのIDを取得する
+        $selectedMembersIds = $project->members()->pluck('user_id')->toArray();
         return view('projects.edit', compact('project', 'users', 'selectedMembersIds'));
     }
-
+    
     // プロジェクトの更新処理
-    public function update(Request $request, Project $project)
+   public function update(Request $request, Project $project)
     {
         // バリデーションルールを定義
         $validatedData = $request->validate([
@@ -74,18 +74,25 @@ class ProjectController extends Controller
             'explanation' => 'nullable|string|max:500',
             'start_day' => 'required|date',
             'limit_day' => 'required|date',
-            'members' => 'required|array',
-            'members.*' => 'integer|exists:custom_users,id',
+            'selected_members' => 'required|array',
+            'selected_members.*' => 'integer|exists:Users,ID', 
         ]);
-
+    
         // プロジェクトを更新
-        $project->update($validatedData);
-
-        // メンバーを更新
-        $project->users()->sync($validatedData['members']);
-
+        $project->update([
+            'title' => $validatedData['title'],
+            'admin' => $validatedData['admin'],
+            'status' => $validatedData['status'],
+            'explanation' => $validatedData['explanation'],
+            'start_day' => $validatedData['start_day'],
+            'limit_day' => $validatedData['limit_day'],
+        ]);
+    
+        // 選択されたメンバーを Members テーブルに追加
+        $project->members()->sync($validatedData['selected_members']);
+    
         // プロジェクト詳細ページへリダイレクト
-        return redirect(route('projects.show', $project))->with('success', 'プロジェクトが更新されました！');
+        return redirect(route('project', $project))->with('success', 'プロジェクトが更新されました！');
     }
     
     public function show($ID)
@@ -94,6 +101,7 @@ class ProjectController extends Controller
         $projectDetails = Project::find($ID);
 
         $tickets = Ticket::where('project_id', $ID)->get();
+        $project = Project::findOrFail($ID);
 
 
         $admin =  CustomUser::findOrFail($projectDetails->admin)->name;
@@ -109,7 +117,7 @@ class ProjectController extends Controller
         //     ];
 
                 // フロントにデータを渡す
-            return view('project',compact('projectDetails','tickets','admin'));
+            return view('project',compact('projectDetails','tickets','admin','project'));
 
         // } else {
         // // プロジェクトが存在しない場合の表示
