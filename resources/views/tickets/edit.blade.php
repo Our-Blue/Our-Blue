@@ -11,6 +11,11 @@
                 <label for="title">チケットタイトル</label>
                 <input id="title" type="text" class="form-control" name="title" value="{{ $ticket->title }}" required autofocus>
             </div>
+            
+            <div class="form-group">
+                <input type="hidden" name="project_id" value="{{ $ticket->project_id }}">
+            </div>
+            
 
             <div class="form-group">
                 <label for="explanation">チケット説明</label>
