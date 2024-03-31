@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MypageController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\Auth\LoginController;
@@ -19,7 +21,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => 'auth'], function () {
+
     // ログイン関連のルート
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); // ログイン画面の表示
     Route::post('/login/', [LoginController::class, 'login']); // ログイン処理
@@ -32,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     // ユーザー新規登録関連のルート
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register'); // ユーザー新規登録画面へのルート
     Route::post('/register/store', [RegisterController::class, 'register'])->name('users.register'); // ユーザー登録処理へのルート // ユーザー登録処理へのルート
-    
+Route::group(['middleware' => 'auth'], function () {
     // プロジェクト関連のルート
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
@@ -55,4 +57,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/result/{projectId?}/{ticketId?}', [SearchController::class, 'result'])->name('result');//検索結果
     
     Route::get('/', [TopController::class, 'index']);
+    Route::post('/logout', [LoginController::class,'logout']) -> name('logout');
  });
