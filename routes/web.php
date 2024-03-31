@@ -19,10 +19,12 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => 'auth'], function () {
-    // ログイン関連のルート
+
+
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); // ログイン画面の表示
     Route::post('/login/', [LoginController::class, 'login']); // ログイン処理
+    
+Route::group(['middleware' => 'auth'], function () {
     
     Route::get('/password/request', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
