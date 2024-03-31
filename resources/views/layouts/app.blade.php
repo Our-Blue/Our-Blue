@@ -9,15 +9,19 @@
 <body>
     <header>
         <a href="{{ url('/') }}" class="header_home">ホーム</a>
-       @if(Auth::check())
-        @endif　　　　　　　<!--ログイン認証完成後、検索とマイページをif文の中に移動*/-->
+        @if(Auth::check())
+       　　
         <div class="search_div">
-            <form action=""{{ route('result') }}"" method="GET" class="search_from">
+            <form action="{{ route('result') }}" method="GET" class="search_form">
                 <input type="search" placeholder="フリーワード検索" name="search" value="@if (isset($search)) {{ $search }} @endif">
                 <input type="submit" value="検索" class="search_button">
             </form>
         </div>
-         <a href="" class="header_mypage">マイページ</a>
+         <a href="{{route('mypage.index')}}" class="header_mypage">マイページ</a>
+        <div class="logout">
+           <form action="{{route('logout')}}" method="post">@csrf <button type="submit" class="out-btn">ログアウト</button></form>
+        </div>
+         @endif　
     </header>
     <main class="container">
         @yield("content")
@@ -33,7 +37,6 @@ header {
     color: #fff;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 .container{
     width:100%;
@@ -44,13 +47,8 @@ header {
     text-align: center;
     margin-right: auto;
     margin-left: 20%;
-
-   
+    margin-top:18px;
 }
-.search_button{
-    width:20%;
-}
-
 .search_from {
     display: flex;
     flex-direction: row;
@@ -58,13 +56,20 @@ header {
 }
 .header_home{
    margin-left:3%;
+   margin-top:18px;
 }
 .header_notice{
    margin-left:20%;
+   margin-top:18px;
 }
 .header_mypage{
     margin-left:auto;
     margin-right:3%;
+    margin-top:18px;
+}
+.out-btn{
+　height:20px;
+  width:100px;
+  margin-top:18px;
 }
 </style>
-

@@ -5,7 +5,7 @@
         <div class="user_name">
             <p>ユーザー名</p>
             <p>{{$mypage->name}}</p>
-            <a href="mypage/{{$mypage->id}}/edit" class="mypage1">
+            <a href="mypage/{{$mypage->ID}}/edit" class="mypage1">
              <button type='button' class='btn btn-primary'>ユーザー情報変更</button>
             </a>
             <br>
@@ -13,24 +13,28 @@
            
         </div>
         <div class="notice_div">
-            
             <p class="notice_p">通知</p>
-            <p class="">routeを入れる。</p>
             @if(count($tickets) > 0)
                 @foreach($tickets as $ticket)
-                 <a href="" class="ticket_a_button"><p>・@if(is_null($ticket->read_flg))<span class="read_flg_null">未読</span><span>　</span>@endif{{$ticket->created_at}}　チケットが登録されました。</p></a>
+                 <a href="{{ route('tickets.show', ['id' => $ticket->ID]) }}" class="ticket_a_button"><p>・@if(is_null($ticket->read_flg))<span class="read_flg_null">未読</span><span>　</span>@endif{{$ticket->created_at}}　チケットが登録されました。</p></a>
                 @endforeach
             @endif
         </div>
     </div>
-    <div class="ticket">
-        <p>チケット一覧</p>
+    
+        <div>
+        <p class="ticket">プロジェクト一覧</p>
         <div class="ticket2">
-             <p class="">routeを入れる,チケット一覧のをいれる</p>
-            <p>チケット一覧</p>
-            <p>チケット一覧</p>
-            <p>チケット一覧</p>
-            <p>チケット一覧</p>
+            @if(count($projects) > 0)
+            @foreach($projects as $project)
+            <a href="/project/{{$project->ID}}">
+                <p class="pj_title">プロジェクト名:{{ $project->title }}</p>
+                <p>{{ $project->explanation }}</p>
+                <p>ステータス: {{ $project->status }}</p>
+                <p>期日: {{ $project->limit_day }}</p>
+            </a>
+            @endforeach
+            @endif
         </div>
     </div>
 @endsection
@@ -69,18 +73,19 @@
 .user_button{
     text-align: center;
 }
-button{height: 40px;
+button{
     margin-top: 20px;
 
 }
 .ticket{
-    text-align: center;
-    font-size: 20px;
+    text-align:center;
 }
 .ticket2{
-  border: 1px solid black;
-  width: 80%;
-  margin: 0 auto;
+    margin-left: 10%;
+    border: 1px solid black;
+    width: 80%;
+    height: 200px;
+    overflow-y: scroll;
 }
 .read_flg_null{
   background-color: red;
@@ -88,5 +93,9 @@ button{height: 40px;
 }
 .ticket_a_button{
     text-decoration: none;
+}
+
+.pj_title{
+    font-size:20px;
 }
 </style>
