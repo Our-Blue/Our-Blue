@@ -11,13 +11,13 @@
     </div>
     @endif
     
-    <form action="{{ route('mypage.update', $auth->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('mypage.update', $auth->ID)}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="input"><span>ユーザー名&emsp;&emsp;&emsp;&emsp;</span>
       <input type="text" name="name" value="{{$mypage->name}}">
     </div><br>
     <div class="input"><span>メールアドレス&emsp;&emsp;</span>
-      <input type="text" name="email" value="{{$mypage->email}}">
+      <input type="text" name="mail" value="{{$mypage->mail}}">
     </div><br>
     <div>
       <input type="hidden" name="_method" value="PUT">
@@ -49,10 +49,7 @@
     display: flex;
     justify-content: center;
 }
-button{
-  width:10%;
-  height:30px;
-}
+
 .pass_change{
     text-align:center;
 }
