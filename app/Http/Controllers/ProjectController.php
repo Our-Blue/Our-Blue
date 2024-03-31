@@ -52,7 +52,7 @@ class ProjectController extends Controller
             ]);
         }
 
-        return redirect()->route('projects.confirm', ['project' => $project->ID])->with('success', 'プロジェクトが登録されました！');
+        return redirect('/');
     }
 
     // プロジェクトの編集画面を表示
