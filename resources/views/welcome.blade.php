@@ -20,6 +20,15 @@
         </style>
     </head>
     <body class="antialiased">
+        <div class="container">
+            <div class="flex justify-center items-center h-screen">
+                <div class="text-center">
+                    <h2 class="mb-6">プロジェクト一覧</h2>
+                    <!-- プロジェクト作成画面へのリンク -->
+                    <a href="{{ route('projects.create') }}" class="btn btn-primary" style="border: 1px solid #3490dc; padding: 10px 20px; border-radius: 5px; text-decoration: none;">プロジェクト作成</a>
+                </div>
+            </div>
+        </div>
         <div class="relative flex items-top justify-center  sm:items-center py-4 sm:pt-0">
             <!--@if (Route::has('login'))-->
             <!--    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">-->

@@ -24,7 +24,9 @@
                     <!-- 他のプロパティに関する表示を追加 -->
                     
                     <!-- Ticket登録画面への遷移ボタン -->
-                    <a href="{{ route('tickets.create') }}">Ticket編集画面へ</a>
+                    <a href="{{ route('projects.edit', ['project' => $project->ID]) }}">Project編集画面へ</a>
+                    
+                    </br>
         
                     <!-- チケットの編集画面への遷移ボタン -->
                     <select onchange="window.location.href=this.value">
