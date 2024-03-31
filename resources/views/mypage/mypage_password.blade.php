@@ -10,8 +10,10 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('mypage.update', $auth->id)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('mypage.update', $auth->ID)}}" method="POST" enctype="multipart/form-data">
     @csrf
+    <input type="hidden" name="name" value="{{$mypage->name}}">
+    <input type="hidden" name="mail" value="{{$mypage->mail}}">
     <div class="input">
         <input type="hidden" name="_method" value="PUT">
         <span>新パスワード&emsp;&emsp;&emsp;&emsp;</span>
@@ -23,11 +25,11 @@
     </div><br>
     <div class="input">
         <a href="{{ route('mypage.index')}}">
-    <input type='submit'　value='更新'>
+            <input type='submit'　value="更新">
         </a>
     </form>
     &emsp;&emsp;
-     <a href="mypage/{{$mypage->id}}/edit" class="mypage1">
+     <a href="mypage/{{$mypage->ID}}/edit" class="mypage1">
     <button type='button'>戻る</button>
     </a>
     </div>
@@ -45,8 +47,5 @@
     display: flex;
     justify-content: center;
 }
-button{
-  width:10%;
-  height:30px;
-}
+
 </style>

@@ -18,8 +18,12 @@ class MypageController extends Controller
     public function index()
     {
       $mypage =Auth::user();
-      $tickets=Ticket::orderBy('created_at','desc')->get();
-        return view('mypage.mypage_index')->with(['tickets' => $tickets,'mypage' => $mypage]);
+      $user_id = Auth::id();
+      $tickets=Ticket::where('user_id', $user_id)
+                ->orderBy('created_at','desc')->get();
+      $projects=Project::where('admin', $user_id)
+                ->orderBy('created_at','desc')->get();
+        return view('mypage.mypage_index')->with(['tickets' => $tickets,'mypage' => $mypage,'projects' => $projects]);
     }
 
 
@@ -78,18 +82,19 @@ class MypageController extends Controller
     {
          $validated = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:Users,email',
+            //'mail' => 'required|unique:Users,mail',
+            'mail' => 'required',
             'password' => 'required|confirmed'
         ], [
             'name.required' => '名前は必須項目です。',
-            'email.required' => 'メールアドレスは必須項目です。',
-            'email.unique' => 'そのメールアドレスはすでに使われています。',
+            'mail.required' => 'メールアドレスは必須項目です。',
+            //'mail.unique' => 'そのメールアドレスはすでに使われています。',
             'password.required' => 'パスワードは必須項目です。',
             'password.confirmed' => '確認用のパスワードが一致していません。',
         ]);
    
         $mypage->name = $request->name;
-        $mypage->email = $request->email;
+        $mypage->mail = $request->mail;
         $mypage->password = bcrypt($request->get('password'));
         $mypage->save();
         return redirect('/mypage');
