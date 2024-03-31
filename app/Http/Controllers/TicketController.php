@@ -78,6 +78,8 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::findOrFail($id);
+        $ticket->read_flg = 1;
+        $ticket->save();
         return view('tickets.show', compact('ticket'));
     }
 
