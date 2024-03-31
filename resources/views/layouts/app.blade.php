@@ -65,6 +65,6 @@ header {
 .header_mypage{
     margin-left:auto;
     margin-right:3%;
-}
+} 
 </style>
 
