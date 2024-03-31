@@ -58,4 +58,4 @@ use App\Http\Controllers\Auth\ResetPasswordController;
     
     Route::get('/', [TopController::class, 'index']);
     Route::post('/logout', [LoginController::class,'logout']) -> name('logout');
- });
+ }); 
